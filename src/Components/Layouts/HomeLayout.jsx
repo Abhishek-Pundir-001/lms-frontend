@@ -44,11 +44,11 @@ function HomeLayout({ children }) {
                 <div className='drawer-side w-0'>
                     <label htmlFor="my-drawer" className='drawer-overlay'></label>
                     <ul className='menu p-4 w-48 h-[90vh]  sm:w-80 bg-base-100 text-base-content relative'>
-                        <ii className="w-fit absolute right-2 z-50">
+                        <li className="w-fit absolute right-2 z-50">
                             <button onClick={hideDrawer}>
                                 <AiFillCloseCircle size={24} />
                             </button>
-                        </ii>
+                        </li>
                         <li>
                             <Link to='/'>Home</Link>
                         </li>
@@ -80,7 +80,7 @@ function HomeLayout({ children }) {
                                 (<li className='w-[90%] absolute bottom-2'>
                                     <div className='flex  w-[90%] justify-center items-center absolute'>
                                         <button className='btn-primary px-4 py-1 rounded-md font-semibold w-full'>Logout</button>
-                                        <button className='btn-primary px-4 py-1 rounded-md font-semibold w-full'>signUp</button>
+                                        <button className='btn-primary px-4 py-1 rounded-md font-semibold w-full'>Profile</button>
                                     </div>
                                 </li>))
                         }

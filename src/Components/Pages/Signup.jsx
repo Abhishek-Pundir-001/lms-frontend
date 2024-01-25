@@ -1,9 +1,10 @@
-import { useState} from "react";
+import { useState } from "react";
 import { BsPerson } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { newAccount } from "../../Redux/Slices/authSlice";
+import HomeLayout from "../Layouts/HomeLayout";
 function Signup() {
     const navigate = useNavigate();
     const dispatch = useDispatch()
@@ -40,72 +41,78 @@ function Signup() {
         }
 
         const response = await dispatch(newAccount(signupData))
-        if (response.payload.success)
+        console.log('res',response)
+        if (response.meta.requestStatus === 'fulfilled'){
             navigate("/")
-        setSignupData({
-            name: "",
-            email: "",
-            password: ""
-        })
+            setSignupData({
+                name: "",
+                email: "",
+                password: ""
+            })
+        }
+            
+       
     }
     return (
-        <div className="h-screen flex justify-center items-center bg-slate-700">
-            <form className="flex flex-col h-auto items-center space-y-3 shadow-[0_35px_60px_-15px_rgba(0,0,0,10)] px-4 py-4 rounded-lg border-2 border-white md:w-1/4">
-                <h1 className="md:text-2xl text-white font-semibold">Registration form</h1>
-                <div className="text-center bg-white rounded-full">
-                    <label htmlFor="avatar">
-                        {previewImage ? (<img src={previewImage} className="rounded-full size-20" alt="profile-img" />) :
-                            <BsPerson className="rounded-full md:size-20 m-3" />
-                        }
+        <HomeLayout>
+            <div className="h-screen flex justify-center items-center bg-slate-700">
+                <form className="flex flex-col h-auto items-center space-y-3 shadow-[0_35px_60px_-15px_rgba(0,0,0,10)] px-4 py-4 rounded-lg border-2 border-white md:w-1/4">
+                    <h1 className="md:text-2xl text-white font-semibold">Registration form</h1>
+                    <div className="text-center bg-white rounded-full">
+                        <label htmlFor="avatar">
+                            {previewImage ? (<img src={previewImage} className="rounded-full size-20" alt="profile-img" />) :
+                                <BsPerson className="rounded-full md:size-20 m-3" />
+                            }
 
+                            <input
+                                type="file"
+                                id="avatar"
+                                name="avatar"
+                                hidden
+
+                            />
+                        </label>
+                    </div>
+                    <div className="w-full">
+                        <label htmlFor="fullname"></label>
                         <input
-                            type="file"
-                            id="avatar"
-                            name="avatar"
-                            hidden
-
+                            type="text"
+                            id="fullname"
+                            name="name"
+                            placeholder="Name"
+                            className="w-full py-2 px-1 rounded-md"
+                            onChange={handleInput}
                         />
-                    </label>
-                </div>
-                <div className="w-full">
-                    <label htmlFor="fullname"></label>
-                    <input
-                        type="text"
-                        id="fullname"
-                        name="name"
-                        placeholder="Name"
-                        className="w-full py-2 px-1 rounded-md"
-                        onChange={handleInput}
-                    />
-                </div>
-                <div className="w-full">
-                    <label htmlFor="email"></label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="email"
-                        className="w-full py-2 px-1 rounded-md"
-                        onChange={handleInput}
-                    />
-                </div>
-                <div className="w-full">
-                    <label htmlFor="password"></label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        placeholder="password"
-                        className="w-full py-2 px-1 rounded-md"
-                        onChange={handleInput}
-                    />
-                </div>
-                <div className="space-x-2 w-full">
-                    <button onClick={createAccount} className="px-4 py-2 w-full bg-orange-600 text-white rounded-lg">Signup</button>
-                </div>
-                <span className="text-sm text-white">Already have an account? <Link className="text-blue-400" to="/login">Login</Link></span>
-            </form>
-        </div>
+                    </div>
+                    <div className="w-full">
+                        <label htmlFor="email"></label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="email"
+                            className="w-full py-2 px-1 rounded-md"
+                            onChange={handleInput}
+                        />
+                    </div>
+                    <div className="w-full">
+                        <label htmlFor="password"></label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="password"
+                            className="w-full py-2 px-1 rounded-md"
+                            onChange={handleInput}
+                        />
+                    </div>
+                    <div className="space-x-2 w-full">
+                        <button onClick={createAccount} className="px-4 py-2 w-full bg-orange-600 text-white rounded-lg">Signup</button>
+                    </div>
+                    <span className="text-sm text-white">Already have an account? <Link className="text-blue-400" to="/login">Login</Link></span>
+                </form>
+            </div>
+        </HomeLayout>
     )
 }
 export default Signup;

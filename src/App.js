@@ -5,6 +5,7 @@ import HomePage from './Components/Pages/HomePage';
 import AboutPage from './Components/Pages/AboutPage';
 import NotFoundPage from './Components/Pages/NotFoundPage';
 import Signup from './Components/Pages/Signup';
+import Login from './Components/Pages/Login';
 
 function App() {
   const {id} = useParams()
@@ -13,8 +14,9 @@ function App() {
     <div className="App">
       <Routes>
        <Route path='/' element={<HomePage />}/>
-       <Route path={`/about/`} element={<AboutPage />}/>
+       <Route path={`/about`} element={<AboutPage />}/>
        <Route path="/signup" element={<Signup />}/> 
+       <Route path="/login" element={<Login />}/>
        <Route path="*" element={<NotFoundPage />}/>
       </Routes>
     </div>
